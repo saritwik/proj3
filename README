@@ -1,8 +1,25 @@
 Instructions to reproduce the results:
-  TODO
+  Un-zip archive
+  cd bufferbloat
+  sudo mn -c
+  sudo ./run.sh
 
 Answers to the questions:
-  1. TODO
-  2. TODO
-  3. TODO
-  4. TODO
+  1. Data packets downloaded from the web server need to wait in queue until all previous packets are sent. 
+  Larger buffer will have larger queue therefore longer fetch time when buffer is larger.
+  
+  2. eth0
+          Link encap:Ethernet  HWaddr 08:00:27:ed:75:96  
+          inet addr:10.0.2.15  Bcast:10.0.2.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:3158 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2648 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:263924 (263.9 KB)  TX bytes:2309099 (2.3 MB)
+         
+    1000 packets * 1500 bytes/packet * 8 bits/byte * 1/(100 MB/s) * 1/10^6 MB/bit = 0.12s
+    
+  3. RTT = k * queue_size
+  4. Mitigations:
+    i.  Throttling/Rate limiting
+    ii. Reduce queue size
