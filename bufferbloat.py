@@ -20,20 +20,20 @@ import sys
 import os
 import math
 
-def mean(values):  
-    size = len(values)  
-    sum = 0.0  
-    for n in range(0, size):  
-        sum += values[n]  
-    return sum / size
+def average(values):  
+    k = len(values)  
+    s = 0.0  
+    for n in range(0, k):  
+        s += values[n]  
+    return s / k
   
 # Calculate standard deviation  
-def std_dev(values, mean):  
-    size = len(values)  
-    sum = 0.0  
-    for n in range(0, size):  
-        sum += (values[n] - mean)**2
-    return math.sqrt((1.0/size)*sum) 
+def standard_deviation(values, mean):  
+    k = len(values)  
+    s = 0.0  
+    for n in range(0, k):  
+        s += (values[n] - mean)**2
+    return math.sqrt((1.0/k)*s) 
 
 parser = ArgumentParser(description="Bufferbloat tests")
 parser.add_argument('--bw-host', '-B',
@@ -213,8 +213,8 @@ def bufferbloat():
 
     print download_times
 
-    average = mean(download_times)
-    sd = std_dev(download_times, average)
+    average = average(download_times)
+    sd = standard_deviation(download_times, average)
 
     print "average: %s" % (average)
     print "standard deviation: %s" % (sd)
